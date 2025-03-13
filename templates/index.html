@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            background-color: #f4f4f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input, select, textarea {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+        .add-button {
+            cursor: pointer;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .add-button:hover {
+            text-decoration: underline;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h2>Resume Generator</h2>
+    <form action="/" method="POST">
+        <label>Full Name</label>
+        <input type="text" name="name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Phone</label>
+        <input type="text" name="phone" required>
+
+        <label>LinkedIn</label>
+        <input type="text" name="linkedin" required>
+
+        <label>GitHub</label>
+        <input type="text" name="github" required>
+
+        <label>Summary</label>
+        <textarea name="summary" required></textarea>
+
+        <label>Are you a Fresher or Experienced?</label>
+        <select id="expType" name="expType" onchange="toggleExperienceFields()">
+            <option value="fresher">Fresher</option>
+            <option value="experienced">Experienced</option>
+        </select>
+
+        <div id="experienceFields" class="hidden">
+            <label>Years of Experience</label>
+            <input type="number" name="experience">
+            <label>Job Role</label>
+            <input type="text" name="job_role">
+            <label>Company Name</label>
+            <input type="text" name="company">
+        </div>
+
+        <label>Skills</label>
+        <input type="text" name="skills" required>
+
+        <label>Education</label>
+        <div id="educationFields">
+            <div class="edu-entry">
+                <input type="text" name="degree" placeholder="Degree">
+                <input type="text" name="university" placeholder="University">
+                <input type="text" name="grad_year" placeholder="Graduation Year">
+            </div>
+        </div>
+        <span class="add-button" onclick="addEducation()">+ Add More Education</span>
+
+        <label>Certifications & Achievements</label>
+        <div id="certificationsFields">
+            <input type="text" name="certifications">
+        </div>
+        <span class="add-button" onclick="addCertification()">+ Add More Certifications</span>
+
+        <label>Do you have any projects?</label>
+        <select id="projects" name="has_projects" onchange="toggleProjects()">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </select>
+
+        <div id="projectFields" class="hidden">
+            <div class="project-entry">
+                <label>Project Name</label>
+                <input type="text" name="project_name">
+                <label>Project Description</label>
+                <textarea name="project_desc"></textarea>
+            </div>
+            <span class="add-button" onclick="addProject()">+ Add More Projects</span>
+        </div>
+
+        <button type="submit">Generate Resume</button>
+    </form>
+
+    <script>
+        function toggleExperienceFields() {
+            let type = document.getElementById('expType').value;
+            document.getElementById('experienceFields').classList.toggle('hidden', type === 'fresher');
+        }
+
+        function toggleProjects() {
+            document.getElementById('projectFields').classList.toggle('hidden', document.getElementById('projects').value === 'no');
+        }
+
+        function addEducation() {
+            let eduDiv = document.createElement('div');
+            eduDiv.classList.add('edu-entry');
+            eduDiv.innerHTML = `<input type="text" name="degree" placeholder="Degree">
+                                <input type="text" name="university" placeholder="University">
+                                <input type="text" name="grad_year" placeholder="Graduation Year">`;
+            document.getElementById('educationFields').appendChild(eduDiv);
+        }
+
+        function addProject() {
+            let projDiv = document.createElement('div');
+            projDiv.classList.add('project-entry');
+            projDiv.innerHTML = `<label>Project Name</label>
+                                 <input type="text" name="project_name">
+                                 <label>Project Description</label>
+                                 <textarea name="project_desc"></textarea>`;
+            document.getElementById('projectFields').appendChild(projDiv);
+        }
+
+        function addCertification() {
+            let certDiv = document.createElement('div');
+            certDiv.innerHTML = `<input type="text" name="certifications">`;
+            document.getElementById('certificationsFields').appendChild(certDiv);
+        }
+    </script>
+</body>
+</html>
