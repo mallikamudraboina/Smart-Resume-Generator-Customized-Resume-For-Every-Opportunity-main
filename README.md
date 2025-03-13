@@ -88,7 +88,7 @@ Skills:
 
 Experience:
 ✔ Software Developer, XYZ Company
-✔ 2 Years of experience
+✔ x Years of experience
 
 Education:
 ✔ B.Tech in Computer Science, ABC University, 2023
